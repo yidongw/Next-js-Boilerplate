@@ -1,6 +1,6 @@
 {
   "name": "next-js-boilerplate",
-  "version": "3.58.0",
+  "version": "1.0.0",
   "author": "Ixartz (https://github.com/ixartz)",
   "scripts": {
     "dev:spotlight": "spotlight-sidecar",
