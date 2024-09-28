@@ -1,7 +1,11 @@
 import { useTranslations } from 'next-intl';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 
+import BalanceERC20 from '@/components/BalanceERC20';
+import SignMessage from '@/components/SignMessage';
 import { Sponsors } from '@/components/Sponsors';
+import TransferERC20 from '@/components/TransferERC20';
+import TransferNative from '@/components/TransferNative';
 
 export async function generateMetadata(props: { params: { locale: string } }) {
   const t = await getTranslations({
@@ -21,6 +25,13 @@ export default function Index(props: { params: { locale: string } }) {
 
   return (
     <>
+      <div className="flex flex-wrap gap-4">
+        <TransferNative />
+        <SignMessage />
+        <TransferERC20 />
+        <BalanceERC20 />
+      </div>
+
       <p>
         {`Follow `}
         <a

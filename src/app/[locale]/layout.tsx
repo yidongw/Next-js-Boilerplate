@@ -1,11 +1,15 @@
 import '@/styles/global.css';
+import '@rainbow-me/rainbowkit/styles.css';
 
 import type { Metadata } from 'next';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 import { DemoBadge } from '@/components/DemoBadge';
+import { Toaster } from '@/components/ui/toaster';
 import { AppConfig } from '@/utils/AppConfig';
+
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   icons: [
@@ -48,14 +52,16 @@ export default function RootLayout(props: {
   return (
     <html lang={props.params.locale}>
       <body>
-        <NextIntlClientProvider
-          locale={props.params.locale}
-          messages={messages}
-        >
-          {props.children}
-
-          <DemoBadge />
-        </NextIntlClientProvider>
+        <Providers>
+          <NextIntlClientProvider
+            locale={props.params.locale}
+            messages={messages}
+          >
+            {props.children}
+            <DemoBadge />
+            <Toaster />
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );
