@@ -43,7 +43,7 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
     "encoding": "^0.1.13",
-    "ethers": "^6.13.2",
+    "ethers": "^6.13.4",
     "lucide-react": "^0.446.0",
     "next": "^14.2.9",
     "next-intl": "^3.19.1",
