@@ -19,6 +19,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 export default withSentryConfig(
   bundleAnalyzer(
     withNextIntlConfig({
+      output: 'standalone',
       eslint: {
         dirs: ['.'],
       },
