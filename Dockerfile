@@ -21,8 +21,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the application
+# Set environment variables for build time
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=1ec30ca8e0f5b67679d91687e18c24e1
+ENV NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cmVsYXhlZC10dXJrZXktNjcuY2xlcmsuYWNjb3VudHMuZGV2JA
+ENV NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+ENV CLERK_SECRET_KEY=your_clerk_secret_key
+
+# Build the application
 RUN npm run build
 
 # Runner stage
@@ -31,6 +37,11 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED 1
+# Set environment variable for runtime
+ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=1ec30ca8e0f5b67679d91687e18c24e1
+ENV NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cmVsYXhlZC10dXJrZXktNjcuY2xlcmsuYWNjb3VudHMuZGV2JA
+ENV NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+ENV CLERK_SECRET_KEY=your_clerk_secret_key
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
