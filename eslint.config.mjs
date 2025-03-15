@@ -41,6 +41,7 @@ export default antfu({
   rules: {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    'unicorn/prefer-node-protocol': 'off',
   },
 }, {
   files: [

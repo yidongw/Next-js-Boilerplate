@@ -1,8 +1,8 @@
-import { useTranslations } from 'next-intl';
+import { Cpu, Database, Key, Lock, MessageSquare, Shield } from 'lucide-react';
+import Link from 'next/link';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 
-import SignMessage from '@/components/SignMessage';
-import { Sponsors } from '@/components/Sponsors';
+import { Button } from '@/components/ui/button';
 
 export async function generateMetadata(props: { params: { locale: string } }) {
   const t = await getTranslations({
@@ -18,94 +18,113 @@ export async function generateMetadata(props: { params: { locale: string } }) {
 
 export default function Index(props: { params: { locale: string } }) {
   unstable_setRequestLocale(props.params.locale);
-  const t = useTranslations('Index');
 
   return (
-    <>
-      <div className="flex flex-wrap gap-4">
-        {/* <TransferNative /> */}
-        <SignMessage />
-        {/* <TransferERC20 />
-        <BalanceERC20 /> */}
+    <div className="flex flex-col gap-8 px-4 py-6">
+      {/* Hero Section */}
+      <section className="mb-12 text-center">
+        <h1 className="mb-4 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-4xl font-bold text-transparent">
+          Fully Homomorphic Encryption Demo
+        </h1>
+        <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+          Experience the power of performing computations on encrypted data while maintaining complete privacy.
+        </p>
+      </section>
+
+      {/* Features Grid */}
+      <div className="mb-12 grid gap-8 md:grid-cols-3">
+        <FeatureCard
+          icon={Key}
+          title="Client-Side Key Generation"
+          description="Generate FHE keys securely in your browser. Only you hold the private key, while the server receives what it needs for computation."
+        />
+        <FeatureCard
+          icon={Lock}
+          title="Encrypted Data Upload"
+          description="Upload and encrypt your sensitive data directly in the browser. Your data remains private throughout its entire lifecycle."
+        />
+        <FeatureCard
+          icon={MessageSquare}
+          title="Interactive Analysis"
+          description="Chat with your encrypted data. Get insights and perform computations while your data remains encrypted."
+        />
       </div>
 
-      <p>
-        {`Follow `}
-        <a
-          className="text-blue-700 hover:border-b-2 hover:border-blue-700"
-          href="https://twitter.com/ixartz"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          @Ixartz on Twitter
-        </a>
-        {` for updates and more information about the boilerplate.`}
-      </p>
-      <h2 className="mt-5 text-2xl font-bold">
-        Boilerplate Code for Your Next.js Project with Tailwind CSS
-      </h2>
-      <p className="text-base">
-        Next.js Boilerplate is a developer-friendly starter code for Next.js projects, built with Tailwind CSS and TypeScript.
-        {' '}
-        <span role="img" aria-label="zap">
-          ⚡️
-        </span>
-        {' '}
-        Designed with developer experience in mind, it includes:
-      </p>
-      <ul className="mt-3 text-base">
-        <li>🚀 Next.js with App Router support</li>
-        <li>🔥 TypeScript for type checking</li>
-        <li>💎 Tailwind CSS integration</li>
-        <li>
-          🔒 Authentication with
-          {' '}
-          <a
-            className="font-bold text-blue-700 hover:border-b-2 hover:border-blue-700"
-            href="https://clerk.com?utm_source=github&amp;utm_medium=sponsorship&amp;utm_campaign=nextjs-boilerplate"
+      {/* How It Works Section */}
+      <section className="mb-12 rounded-2xl bg-muted/50 p-8">
+        <h2 className="mb-6 text-center text-3xl font-bold text-foreground">How It Works</h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          <Step
+            number={1}
+            icon={Shield}
+            title="Generate Keys"
+            description="Create your FHE keys in the browser. The public parts are sent to the server while your private key never leaves your device."
+          />
+          <Step
+            number={2}
+            icon={Database}
+            title="Upload Encrypted Data"
+            description="Your data is encrypted before being sent to the server. Only you can decrypt it with your private key."
+          />
+          <Step
+            number={3}
+            icon={Cpu}
+            title="Compute on Encrypted Data"
+            description="The server performs calculations on your encrypted data without ever seeing the actual values."
+          />
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="rounded-2xl bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-12 text-center">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">Ready to Try It Out?</h2>
+        <p className="mb-6 text-lg text-muted-foreground">
+          Start by generating your FHE keys and experience secure computation on encrypted data.
+        </p>
+        <div className="flex justify-center gap-4">
+          <Button
+            asChild
+            variant="default"
+            className="bg-purple-500 hover:bg-purple-600 dark:bg-purple-600 dark:hover:bg-purple-700"
           >
-            Clerk
-          </a>
-          {' '}
-          (includes passwordless, social, and multi-factor auth)
-        </li>
-        <li>📦 ORM with DrizzleORM (PostgreSQL, SQLite, MySQL support)</li>
-        <li>
-          🌐 Multi-language support (i18n) with next-intl and
-          {' '}
-          <a
-            className="font-bold text-blue-700 hover:border-b-2 hover:border-blue-700"
-            href="https://l.crowdin.com/next-js"
+            <Link href="/fhe-keys">Generate Keys</Link>
+          </Button>
+          <Button
+            asChild
+            variant="default"
+            className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
           >
-            Crowdin
-          </a>
-        </li>
-        <li>🔴 Form handling (React Hook Form) and validation (Zod)</li>
-        <li>📏 Linting and formatting (ESLint, Prettier)</li>
-        <li>🦊 Git hooks and commit linting (Husky, Commitlint)</li>
-        <li>🦺 Testing suite (Vitest, React Testing Library, Playwright)</li>
-        <li>🎉 Storybook for UI development</li>
-        <li>
-          🚨 Error monitoring (
-          <a
-            className="font-bold text-blue-700 hover:border-b-2 hover:border-blue-700"
-            href="https://sentry.io/for/nextjs/?utm_source=github&amp;utm_medium=paid-community&amp;utm_campaign=general-fy25q1-nextjs&amp;utm_content=github-banner-nextjsboilerplate-logo"
-          >
-            Sentry
-          </a>
-          ) and logging (Pino.js)
-        </li>
-        <li>🖥️ Monitoring as Code (Checkly)</li>
-        <li>🤖 SEO optimization (metadata, JSON-LD, Open Graph tags)</li>
-        <li>⚙️ Development tools (VSCode config, bundler analyzer, changelog generation)</li>
-      </ul>
-      <p className="text-base">
-        Our sponsors&apos; exceptional support has made this project possible.
-        Their services integrate seamlessly with the boilerplate, and we
-        recommend trying them out.
-      </p>
-      <h2 className="mt-5 text-2xl font-bold">{t('sponsors_title')}</h2>
-      <Sponsors />
-    </>
+            <Link href="/data">Upload Data</Link>
+          </Button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function FeatureCard({ icon: Icon, title, description }: { icon: any; title: string; description: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-purple-500/50 hover:bg-accent/50">
+      <Icon className="mb-4 size-12 text-purple-500" />
+      <h3 className="mb-2 text-xl font-semibold text-foreground">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </div>
+  );
+}
+
+function Step({ number, icon: Icon, title, description }: { number: number; icon: any; title: string; description: string }) {
+  return (
+    <div className="flex flex-col items-center text-center">
+      <div className="relative">
+        <div className="mb-4 flex size-16 items-center justify-center rounded-full bg-purple-500/10">
+          <Icon className="size-8 text-purple-500" />
+        </div>
+        <div className="absolute -right-2 -top-2 flex size-8 items-center justify-center rounded-full bg-blue-500 font-bold text-white dark:bg-blue-600">
+          {number}
+        </div>
+      </div>
+      <h3 className="mb-2 text-xl font-semibold text-foreground">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </div>
   );
 }
