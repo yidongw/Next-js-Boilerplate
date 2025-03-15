@@ -240,7 +240,7 @@ export default function DataPage() {
       );
 
       // Send to server
-      const response = await fetch(`https://localhost:8080/api/data`, {
+      const response = await fetch(`/api/data`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

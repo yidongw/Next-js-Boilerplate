@@ -83,7 +83,7 @@ export function CreateKeyDialog() {
             }),
           );
 
-          const response = await fetch(`https://localhost:8080/api/server-key`, {
+          const response = await fetch(`/api/server-key`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/octet-stream',

@@ -90,7 +90,7 @@ export function ChatDialog({ isOpen, onClose, dataName, dataId }: ChatDialogProp
       };
 
       // Start the fetch request but don't await it
-      fetch('https://localhost:8080/api/analyze', {
+      fetch('/api/analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
