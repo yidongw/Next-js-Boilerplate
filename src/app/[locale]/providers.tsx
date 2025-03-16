@@ -24,7 +24,7 @@ export function Providers({ children }: Readonly<{ children: ReactNode }>) {
         <RainbowKitProvider coolMode appInfo={appInfo}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
